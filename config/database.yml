@@ -18,11 +18,27 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
+  host: <%= ENV["HOST_DEV"] %>
+  port: <%= ENV["PORT_DEV"] %>
+  username: <%= ENV["USERNAME_DEV"] %>
+  password: <%= ENV["PASSWORD_DEV"] %>
 
 development:
-  <<: *default
-  database: event_reminder_development
+  primary: &primary_development
+    <<: *default
+    database: event_reminder_development
+  cache:
+    <<: *primary_development
+    database: event_reminder_development_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_development
+    database: event_reminder_development_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_development
+    database: event_reminder_development_cable
+    migrations_paths: db/cable_migrate
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -55,8 +71,21 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: event_reminder_test
+  primary: &primary_test
+    <<: *default
+    database: event_reminder_test
+  cache:
+    <<: *primary_test
+    database: event_reminder_test_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_test
+    database: event_reminder_test_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_test
+    database: event_reminder_test_cable
+    migrations_paths: db/cable_migrate
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
