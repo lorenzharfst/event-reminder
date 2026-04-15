@@ -17,11 +17,12 @@ default: &default
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
+  # This is supposed to have env variables to it but I cba to make dotenv work 
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV["HOST_DEV"] %>
-  port: <%= ENV["PORT_DEV"] %>
-  username: <%= ENV["USERNAME_DEV"] %>
-  password: <%= ENV["PASSWORD_DEV"] %>
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
 
 development:
   primary: &primary_development
