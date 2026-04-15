@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  performer: one
+  fan: one
+  event_date: 2026-04-15
+
+two:
+  performer: two
+  fan: two
+  event_date: 2026-04-15
