@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_15_223054) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_16_111046) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,22 +21,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_15_223054) do
     t.index ["user_id"], name: "index_fans_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.date "event_date"
-    t.bigint "fan_id", null: false
-    t.bigint "performer_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["fan_id"], name: "index_notifications_on_fan_id"
-    t.index ["performer_id"], name: "index_notifications_on_performer_id"
-  end
-
   create_table "performers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_performers_on_user_id"
+  end
+
+  create_table "reminders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "fan_id", null: false
+    t.bigint "performer_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fan_id"], name: "index_reminders_on_fan_id"
+    t.index ["performer_id"], name: "index_reminders_on_performer_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -57,8 +56,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_15_223054) do
   end
 
   add_foreign_key "fans", "users"
-  add_foreign_key "notifications", "fans"
-  add_foreign_key "notifications", "performers"
   add_foreign_key "performers", "users"
+  add_foreign_key "reminders", "fans"
+  add_foreign_key "reminders", "performers"
   add_foreign_key "sessions", "users"
 end
