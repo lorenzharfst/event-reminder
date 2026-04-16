@@ -1,6 +1,6 @@
-class CreateReminders < ActiveRecord::Migration[8.1]
+class CreateNotifications < ActiveRecord::Migration[8.1]
   def change
-    create_table :reminders do |t|
+    create_table :notifications do |t|
       t.references :fan, null: false, foreign_key: true
       t.references :performer, null: false, foreign_key: true
 

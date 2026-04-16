@@ -1,5 +1,5 @@
 class Fan < ApplicationRecord
-  has_many :reminders
-  has_many :performers, through: :reminders
+  has_many :notifications
+  has_many :performers, through: :notifications
   belongs_to :user
 end
