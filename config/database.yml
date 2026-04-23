@@ -19,10 +19,10 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   # This is supposed to have env variables to it but I cba to make dotenv work 
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: localhost
-  port: 5432
-  username: postgres
-  password: postgres
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV["DB_PORT"] %>
+  username: <%= ENV["DB_USER"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
 
 development:
   primary: &primary_development
