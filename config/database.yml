@@ -118,8 +118,8 @@ production:
   primary: &primary_production
     <<: *default
     database: event_reminder_production
-    username: event_reminder
-    password: <%= ENV["EVENT_REMINDER_DATABASE_PASSWORD"] %>
+    username: <%= ENV["DB_USER"] %>
+    password: <%= ENV["DB_PASSWORD"] %>
   cache:
     <<: *primary_production
     database: event_reminder_production_cache
