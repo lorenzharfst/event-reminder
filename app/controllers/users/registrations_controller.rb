@@ -8,6 +8,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     super
     # TODO: Assign a fan or a fan&performer to the User, maybe use an after_action?
+    # Check the controller/devise classes or the views (generate em) to see how the
+    # information is passed and use that to assign that fan/performer. Might
+    # actually just make all users fan&performer by nature, check devnotes.
   end
 
   # POST /resource
