@@ -12,4 +12,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  # Rerouting devise-specific registration actions to the new generated controllers
+  # so we can assign new users to either fan or fan&performer
+  devise_for :users, controllers: { registrations: "users/registrations" }
 end
