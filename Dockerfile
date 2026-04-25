@@ -74,6 +74,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 80
-# Adding 3000 because server is unreachable and I'm desperately trying random stuff
-EXPOSE 3000
 CMD ["./bin/thrust", "./bin/rails", "server"]

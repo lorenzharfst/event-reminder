@@ -32,6 +32,9 @@ registry:
   # password:
   #   - KAMAL_REGISTRY_PASSWORD
 
+proxy:
+  app_port: 3000
+
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
   secret:
