@@ -38,9 +38,11 @@ Rails.application.configure do
   config.logger   = ActiveSupport::TaggedLogging.logger(STDOUT)
 
   # Change to "debug" to log everything (including potentially personally-identifiable information!).
+  # Set this back to normal when server becomes reachable w/ kamal
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "debug")
 
   # Prevent health checks from clogging up the logs.
+  # Silenced because server is unreachable when deployed and debugging
   # config.silence_healthcheck_path = "/up"
 
   # Don't log any deprecations.
