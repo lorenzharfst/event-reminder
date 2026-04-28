@@ -1,1 +1,9 @@
 <h1>Events for <%= @performer.name %></h1>
+<br>
+<%= form_with model: @performer do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <%= form.submit %>
+<% end %>

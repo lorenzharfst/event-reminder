@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   # TODO: Do this right without rails breaking
   devise_for :users, controllers: { registrations: "users/registrations" }
 
-  get "performers/:performer_id", to: "performers#index", as: :performers
+  get "performers/:performer_id", to: "performers#index", as: :performer
+  patch "performers/:performer_id", to: "performers#name", as: :edit_performer_name
 end
