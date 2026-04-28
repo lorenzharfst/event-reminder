@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   # so we can assign new users to either fan or fan&performer
   # TODO: Do this right without rails breaking
   devise_for :users, controllers: { registrations: "users/registrations" }
+
+  get "performers/:performer_id", to: "performers#index"
 end

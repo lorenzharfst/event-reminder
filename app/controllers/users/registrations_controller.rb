@@ -11,6 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |resource|
+      logger.debug "Creating fan and performer associations for user"
       resource.create_fan
       resource.create_performer
     end
