@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   # TODO: Do this right without rails breaking
   devise_for :users, controllers: { registrations: "users/registrations" }
 
-  get "performers/:performer_id", to: "performers#index"
+  get "performers/:performer_id", to: "performers#index", as: :performers
 end
