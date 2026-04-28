@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -16,5 +15,5 @@ Rails.application.routes.draw do
   # Rerouting devise-specific registration actions to the new generated controllers
   # so we can assign new users to either fan or fan&performer
   # TODO: Do this right without rails breaking
-  devise_for :users, controllers: { registrations: "users/registrations" }, only: [ :new ]
+  devise_for :users, controllers: { registrations: "users/registrations" }
 end

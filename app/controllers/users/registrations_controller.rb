@@ -5,18 +5,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    super
+  # def new
+  # end
+
+  # POST /resource
+  def create
+    super do |resource|
+      resource.create_fan
+      resource.create_performer
+    end
     # TODO: Assign a fan or a fan&performer to the User, maybe use an after_action?
     # Check the controller/devise classes or the views (generate em) to see how the
     # information is passed and use that to assign that fan/performer. Might
     # actually just make all users fan&performer by nature, check devnotes.
   end
-
-  # POST /resource
-  # def create
-  #   super
-  # end
 
   # GET /resource/edit
   # def edit
