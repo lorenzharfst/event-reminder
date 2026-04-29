@@ -1,4 +1,5 @@
 class PerformersController < ApplicationController
+  before_action :authenticate_user!
   def index
     logger.debug "Checking for performer with id #{params[:performer_id]}"
     @performer = Performer.find_by(id: params[:performer_id])
