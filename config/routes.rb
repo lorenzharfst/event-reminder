@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   # TODO: Do this right without rails breaking
   devise_for :users, controllers: { registrations: "users/registrations" }
 
-  get "performers/:performer_id", to: "performers#index", as: :performer
-  patch "performers/:performer_id", to: "performers#name", as: :edit_performer_name
+  # Performers with their nested route event
+  resources :performers do
+    resource :event
+  end
+  # The call to resolve is necessary for converting instances of Event to singular routes through record identification. (Taken from the documentation)
+  resolve("Event") { [ :event ] }
 end

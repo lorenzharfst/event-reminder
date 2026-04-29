@@ -1,11 +1,11 @@
 class PerformersController < ApplicationController
   before_action :authenticate_user!
-  def index
-    logger.debug "Checking for performer with id #{params[:performer_id]}"
-    @performer = Performer.find_by(id: params[:performer_id])
+  def show
+    logger.debug "Checking for performer with id #{params[:id]}"
+    @performer = Performer.find_by(id: params[:id])
   end
-  def name
-    @performer = Performer.find_by(id: params[:performer_id])
+  def update
+    @performer = Performer.find_by(id: params[:id])
     logger.debug "Setting name: #{params[:performer][:name]} for #{@performer.id}"
     @performer.name = params[:performer][:name]
     @performer.save
