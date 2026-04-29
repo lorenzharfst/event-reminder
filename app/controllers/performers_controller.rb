@@ -3,6 +3,9 @@ class PerformersController < ApplicationController
   def show
     logger.debug "Checking for performer with id #{params[:id]}"
     @performer = Performer.find_by(id: params[:id])
+    @event = Event.new
+    @event.performer = @performer
+    @event_list = @performer.events
   end
   def update
     @performer = Performer.find_by(id: params[:id])

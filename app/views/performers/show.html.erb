@@ -1,11 +1,33 @@
 <h1>Events for <%= @performer.name %></h1>
 <br>
 <% if current_user.performer.id == @performer.id %>
-  <%= form_with model: @performer do |form| %>
-    <div>
-      <%= form.label :name %>
-      <%= form.text_field :name %>
-    </div>
-    <%= form.submit %>
-  <% end %>
+  <div>
+    <%= form_with model: @performer do |form| %>
+      <div>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
+      <%= form.submit %>
+    <% end %>
+  </div>
+  <div>
+    <%= form_with model: @event, url:"/performers/#{@performer.id}/events", method: "post" do |form| %>
+      <div>
+        <%= form.label :event_date %>
+        <%= form.date_field :event_date %>
+      </div>
+      <div>
+        <%= form.label :location %>
+        <%= form.search_field :location %>
+      </div>
+      <%= form.submit %>
+    <% end %>
+  </div>
+  <div>
+    <ul>
+      <% @event_list.each do |event| %>
+        <li> <%= event.event_date %>&#9;<%= event.location%> </li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   # Performers with their nested route event
   resources :performers do
-    resource :event
+    resources :events, only: [ :create, :update, :index ]
   end
   # The call to resolve is necessary for converting instances of Event to singular routes through record identification. (Taken from the documentation)
   resolve("Event") { [ :event ] }
