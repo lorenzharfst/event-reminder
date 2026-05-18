@@ -28,15 +28,16 @@
   <%# TODO: Here go the greyed out notification forms %>
 <% elsif user_signed_in? %>
 <%# TODO: Here you can set up the notifications %>
-  <%= form_with model: @notification, url:"/performers/#{@performer.id}/events", method: "post" do |form| %>
-    <div>
-      <%= form.label :event_date %>
-      <%= form.date_field :event_date %>
-    </div>
+  <%= form_with model: @notification do |form| %>
     <div>
       <%= form.label :location %>
       <%= form.search_field :location %>
     </div>
+    <div>
+      <%= form.label :distance %>
+      <%= form.number_field :distance, in: 0.0..1000.0, step: 5 %>
+    </div>
+    <input type="hidden" id="performer_id" name="notification[performer_id]" value="<%= @performer.id %>">
     <%= form.submit %>
   <% end %>
 <% end %>

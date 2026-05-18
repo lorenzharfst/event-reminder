@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   resources :performers do
     resources :events, only: [ :create, :update, :index ]
   end
+
+  resources :notifications
   # The call to resolve is necessary for converting instances of Event to singular routes through record identification. (Taken from the documentation)
   resolve("Event") { [ :event ] }
 end

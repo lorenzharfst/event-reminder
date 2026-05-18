@@ -5,6 +5,7 @@ class PerformersController < ApplicationController
   def show
     logger.debug "Checking for performer with id #{params[:id]}"
     @performer = Performer.find_by(id: params[:id])
+    @notification = Notification.new
   end
 
   def update
