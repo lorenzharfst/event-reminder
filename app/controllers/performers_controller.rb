@@ -1,12 +1,10 @@
 class PerformersController < ApplicationController
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: :show
+
   def show
     logger.debug "Checking for performer with id #{params[:id]}"
     @performer = Performer.find_by(id: params[:id])
-    @event = Event.new
-    @event.performer = @performer
-    @event_list = @performer.events
   end
 
   def update
