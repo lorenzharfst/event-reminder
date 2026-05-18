@@ -1,7 +1,13 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!
   def index
-    @performer_id = current_user.performer.id
+    if current_user.performer.present?
+      @performer_id = current_user.performer.id
+    else
+      current_user.performer = Performer.new
+      current_user.save
+      @performer_id = current_user.performer.id
+    end
     logger.debug "Loading homepage for performer id: #{@performer_id}"
     redirect_to performer_path(current_user.performer)
   end
