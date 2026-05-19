@@ -1,0 +1,19 @@
+# config/sidekiq.yml
+#
+# The `osrm` queue is given its own concurrency: 1 thread pool, which means
+# Sidekiq will never run two OSRM jobs at the same time, regardless of how
+# many jobs are waiting. This is the primary serialisation mechanism.
+#
+# The `default` queue retains its own concurrency (5 here — adjust as needed)
+# so the rest of your background jobs are unaffected.
+
+:concurrency: 5           # global default for all other queues
+
+:queues:
+  - default
+  - osrm
+
+# Per-queue concurrency overrides (requires Sidekiq 7+ or the
+# sidekiq-throttled gem on older versions)
+:queue_concurrency:
+  osrm: 1                 # ← serialises OSRM jobs; only 1 runs at a time
