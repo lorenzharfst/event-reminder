@@ -67,3 +67,4 @@ end
 
 gem "devise", "~> 5.0"
 gem "dotenv-rails", groups: [ :development, :test ]
+gem "webmock"
