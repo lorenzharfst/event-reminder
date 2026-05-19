@@ -25,7 +25,4 @@ Rails.application.routes.draw do
   resources :notifications
   # The call to resolve is necessary for converting instances of Event to singular routes through record identification. (Taken from the documentation)
   resolve("Event") { [ :event ] }
-
-  # For active job
-  resources :routing, only: [ :create, :show ]
 end
