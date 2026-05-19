@@ -25,31 +25,26 @@ class RoutingRequestService
   # @param destination [String]  e.g. "Barcelona"
   # @return [RoutingRequest]  the newly created, still-pending record
   # @raise  [InvalidInputError] if either argument is blank
-  def self.call(origin, destination)
-    new(origin, destination).call
+  def self.call(origin, destination, fan_distance, fan)
+    new(origin, destination, fan_distance, fan).call
   end
 
-  def initialize(origin, destination)
+  def initialize(origin, destination, fan_distance, fan_id)
     @origin      = origin.to_s.strip
     @destination = destination.to_s.strip
+    @fan_distance = fan_distance
+    @fan_id = fan_id
   end
 
   def call
     validate!
 
-    routing_request = RoutingRequest.create!(
-      origin:      @origin,
-      destination: @destination,
-      status:      "pending"
-    )
-
     OsrmRoutingWorker.perform_async(
-      routing_request.id,
       @origin,
-      @destination
+      @destination,
+      @fan_distance,
+      @fan_id
     )
-
-    routing_request
   end
 
   private
@@ -57,6 +52,5 @@ class RoutingRequestService
   def validate!
     raise InvalidInputError, "Origin can't be blank"      if @origin.blank?
     raise InvalidInputError, "Destination can't be blank" if @destination.blank?
-    raise InvalidInputError, "Origin and destination must differ" if @origin.casecmp?(@destination)
   end
 end

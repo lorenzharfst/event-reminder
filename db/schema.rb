@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_18_165630) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_19_211707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -47,6 +47,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_18_165630) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_performers_on_user_id"
+  end
+
+  create_table "routing_requests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "destination"
+    t.decimal "distance_km"
+    t.decimal "duration_minutes"
+    t.text "error_message"
+    t.string "origin"
+    t.string "status"
+    t.datetime "updated_at", null: false
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -12,8 +12,17 @@ class EventsController < ApplicationController
     @event_performer = Performer.find_by(id: params[:performer_id])
     @event.performer = @event_performer
     logger.debug "Creating new event: performer_id: #{@event.performer.id}, location: #{@event.location}, date: #{@event.event_date}"
-    # @event.performer = current_user.performer
     @event.save
+    if !@event.id.nil?
+      relevant_notifications = Notification.where(performer_id: @event.performer.id)
+      if relevant_notifications.nil?
+        logger.debug "No notifications were found with this performer"
+      else
+        relevant_notifications.each do
+          |n| RoutingRequestService.call(n.location, @event.location, n.distance, n.fan_id)
+        end
+      end
+    end
     redirect_to performer_events_path
   end
 

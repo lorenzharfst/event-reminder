@@ -40,13 +40,15 @@ class OsrmRoutingService
   # @param origin      [String] e.g. "Barcelona"
   # @param destination [String] e.g. "Madrid"
   # @return [Hash] with keys :status, :distance_km, :duration_minutes (or :message on error)
-  def self.call(origin, destination)
-    new(origin, destination).call
+  def self.call(origin, destination, fan_distance, fan)
+    new(origin, destination, fan_distance, fan).call
   end
 
-  def initialize(origin, destination)
+  def initialize(origin, destination, fan_distance, fan)
     @origin      = origin
     @destination = destination
+    @fan_distance = fan_distance
+    @fan = fan
   end
 
   def call

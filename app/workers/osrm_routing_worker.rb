@@ -36,15 +36,23 @@ class OsrmRoutingWorker
   # @param routing_request_id [Integer]  ActiveRecord id of the pending record
   # @param origin             [String]   e.g. "Girona"
   # @param destination        [String]   e.g. "Barcelona"
-  def perform(routing_request_id, origin, destination)
+  def perform(origin, destination, fan_distance, fan_id)
     enforce_rate_limit!
 
-    result = OsrmRoutingService.call(origin, destination)
 
-    if result[:status] == :ok
-      persist_result(routing_request_id, result)
+    puts "Comparing #{origin.capitalize} with #{destination.capitalize}"
+    if origin.casecmp?(destination)
+      puts "Fan with id #{fan_id} will get notified for origin, destination: #{origin}, #{destination} as they are the same location"
     else
-      persist_error(routing_request_id, result[:message])
+      result = OsrmRoutingService.call(origin, destination, fan_distance, fan_id)
+      if result[:status] == :ok
+        puts "Checking fan with id #{fan_id} with origin: #{origin} destination: #{destination}"
+        if result[:distance_km] <= fan_distance
+          puts "Fan with id #{fan_id} will get notified for origin, destination: #{origin}, #{destination}"
+        end
+      else
+        puts "Error: #{result[:message]}"
+      end
     end
   end
 
@@ -91,6 +99,7 @@ class OsrmRoutingWorker
   #     t.timestamps
   #   end
 
+  # TODO: Delete once I'm sure it's not needed
   def persist_result(id, result)
     RoutingRequest.find(id).update!(
       status:           "completed",

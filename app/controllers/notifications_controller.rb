@@ -4,7 +4,8 @@ class NotificationsController < ApplicationController
     @notification = Notification.new(notification_params)
     @notification.fan = current_user.fan
     @notification.performer = Performer.find_by(id: notification_params[:performer_id])
-    @notification.save
+    @notification.save!
+    logger.debug "Saved notification with id: #{@notification.id}"
     # TODO: Decide whether we just put a notification or redirect the fan to their list of notifications
   end
   private
