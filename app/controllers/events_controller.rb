@@ -10,7 +10,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event_performer = Performer.find_by(id: params[:performer_id])
+    @event_performer = current_user.performer
     @event.performer = @event_performer
     logger.debug "Creating new event: performer_id: #{@event.performer.id}, location: #{@event.location}, date: #{@event.event_date}"
     @event.save
