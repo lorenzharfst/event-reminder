@@ -65,7 +65,7 @@ class OsrmRoutingWorker
   # -----------------------------------------------------------------------
 
   def send_proximity_alert(fan, performer, event, distance_km)
-    return if EventNotification.already_sent?(fan.id, event.event_date, event.location)
+    return if EventNotification.already_sent?(fan.id, event.event_date, event.location, event.performer_id)
 
     FanMailer.proximity_alert(fan, performer, event, distance_km).deliver_now
     EventNotification.create!(event_id: event.id, fan_id: fan.id, sent_at: Time.current)
