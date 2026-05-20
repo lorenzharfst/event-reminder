@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_20_223407) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_20_231603) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "event_notifications", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "event_id", null: false
+    t.bigint "fan_id", null: false
     t.datetime "sent_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_event_notifications_on_event_id"
+    t.index ["fan_id"], name: "index_event_notifications_on_fan_id"
     t.index ["sent_at"], name: "index_event_notifications_on_sent_at"
   end
 
@@ -92,6 +94,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_20_223407) do
   end
 
   add_foreign_key "event_notifications", "events"
+  add_foreign_key "event_notifications", "fans"
   add_foreign_key "events", "performers"
   add_foreign_key "fans", "users"
   add_foreign_key "notifications", "fans"
