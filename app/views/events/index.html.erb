@@ -1,37 +1,69 @@
-<h1>Events for <%= @performer.name %></h1>
-<br>
+<div class="mb-4">
+  <h1 class="fw-bold mb-0">Events for <%= @performer.name %></h1>
+  <hr class="mt-2">
+</div>
+
 <% if current_user.performer.id == @performer.id %>
-  <div>
-    <%= form_with model: @performer do |form| %>
-      <div>
-        <%= form.label :name %>
-        <%= form.text_field :name %>
+  <div class="row g-4">
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white fw-semibold border-bottom">Update Stage Name</div>
+        <div class="card-body">
+          <%= form_with model: @performer do |form| %>
+            <div class="mb-3">
+              <%= form.label :name, class: "form-label" %>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+            <%= form.submit "Update", class: "btn btn-outline-secondary" %>
+          <% end %>
+        </div>
       </div>
-      <%= form.submit %>
-    <% end %>
-  </div>
-  <div>
-    <%= form_with model: @event, url:"/performers/#{@performer.id}/events", method: "post" do |form| %>
-      <div>
-        <%= form.label :event_date %>
-        <%= form.date_field :event_date %>
+    </div>
+
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-white fw-semibold border-bottom">Add New Event</div>
+        <div class="card-body">
+          <%= form_with model: @event, url: "/performers/#{@performer.id}/events", method: "post" do |form| %>
+            <div class="mb-3">
+              <%= form.label :event_date, class: "form-label" %>
+              <%= form.date_field :event_date, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :location, class: "form-label" %>
+              <%= form.search_field :location, class: "form-control", placeholder: "City or region" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :venue, class: "form-label" %>
+              <%= form.text_field :venue, class: "form-control", placeholder: "Venue name (optional)" %>
+            </div>
+            <%= form.submit "Add Event", class: "btn btn-primary" %>
+          <% end %>
+        </div>
       </div>
-      <div>
-        <%= form.label :location %>
-        <%= form.search_field :location %>
+    </div>
+
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-white fw-semibold border-bottom">Upcoming Events</div>
+        <% if @event_list.any? %>
+          <ul class="list-group list-group-flush">
+            <% @event_list.each do |event| %>
+              <li class="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-1 py-3">
+                <div>
+                  <span class="fw-semibold"><%= event.location %></span>
+                  <% if event.venue.present? %>
+                    <span class="text-muted small ms-1">— <%= event.venue %></span>
+                  <% end %>
+                </div>
+                <span class="badge bg-primary rounded-pill"><%= event.event_date.strftime("%b %-d, %Y") %></span>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="card-body text-muted fst-italic">No events yet.</div>
+        <% end %>
       </div>
-      <div>
-        <%= form.label :venue %>
-        <%= form.text_field :venue %>
-      </div>
-      <%= form.submit %>
-    <% end %>
-  </div>
-  <div>
-    <ul>
-      <% @event_list.each do |event| %>
-        <li> <%= event.event_date %>&#9;<%= event.location%> </li>
-      <% end %>
-    </ul>
+    </div>
   </div>
 <% end %>

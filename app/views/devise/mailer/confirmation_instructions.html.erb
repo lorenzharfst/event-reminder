@@ -1,5 +1,9 @@
-<p>Welcome <%= @email %>!</p>
+<p style="margin:0 0 8px;font-size:20px;font-weight:700;color:#212529;">Welcome to Event Reminder!</p>
+<p style="margin:0 0 24px;font-size:15px;color:#6c757d;">Thanks for signing up. Please confirm your email address to get started.</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p style="margin:0 0 28px;text-align:center;">
+  <%= link_to "Confirm my account", confirmation_url(@resource, confirmation_token: @token),
+      style: "display:inline-block;background-color:#0d6efd;color:#ffffff;padding:12px 28px;border-radius:6px;text-decoration:none;font-size:15px;font-weight:600;" %>
+</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p style="margin:0;font-size:13px;color:#adb5bd;">If you didn't create this account you can safely ignore this email.</p>
