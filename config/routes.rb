@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   # Performers with their nested route event
   resources :performers do
-    resources :events, only: [ :create, :update, :index ]
+    resources :events, only: [ :create, :update, :index, :destroy ]
   end
 
   resources :notifications

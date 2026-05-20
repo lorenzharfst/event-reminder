@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!
   def index
     logger.debug "Checking for performer with id #{params[:performer_id]}"
     @performer = Performer.find_by(id: params[:performer_id])
@@ -24,6 +25,14 @@ class EventsController < ApplicationController
       end
     end
     redirect_to performer_events_path
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    if @event.performer.id == current_user.performer.id
+      @event.destroy
+    end
+    redirect_to performer_events_path(params[:performer_id])
   end
 
   private
