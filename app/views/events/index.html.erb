@@ -29,9 +29,20 @@
               <%= form.label :event_date, class: "form-label" %>
               <%= form.date_field :event_date, class: "form-control" %>
             </div>
-            <div class="mb-3">
+            <div class="mb-3" data-controller="location-autocomplete"
+                              data-action="click@window->location-autocomplete#clickOutside">
               <%= form.label :location, class: "form-label" %>
-              <%= form.search_field :location, class: "form-control", placeholder: "City or region" %>
+              <div class="position-relative">
+                <%= form.search_field :location, class: "form-control", placeholder: "City or region",
+                      autocomplete: "off",
+                      data: {
+                        location_autocomplete_target: "input",
+                        action: "input->location-autocomplete#onInput"
+                      } %>
+                <div data-location-autocomplete-target="dropdown"
+                     class="dropdown-menu w-100"
+                     style="top:100%;max-height:220px;overflow-y:auto;"></div>
+              </div>
             </div>
             <div class="mb-3">
               <%= form.label :venue, class: "form-label" %>
