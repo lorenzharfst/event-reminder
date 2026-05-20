@@ -44,13 +44,14 @@ class OsrmRoutingWorker
 
     fan       = Fan.find(fan_id)
     performer = Performer.find(performer_id)
+    event     = Event.find(event_id)
 
     if origin.casecmp?(destination)
-      send_proximity_alert(fan, performer, 0.0, event_id)
+      send_proximity_alert(fan, performer, event, 0.0)
     else
       result = OsrmRoutingService.call(origin, destination, fan_distance, fan_id)
       if result[:status] == :ok && result[:distance_km] <= fan_distance
-        send_proximity_alert(fan, performer, result[:distance_km], event_id)
+        send_proximity_alert(fan, performer, event, result[:distance_km])
       elsif result[:status] != :ok
         puts "Error: #{result[:message]}"
       end
@@ -63,9 +64,9 @@ class OsrmRoutingWorker
   # Email + persistence
   # -----------------------------------------------------------------------
 
-  def send_proximity_alert(fan, performer, distance_km, event_id)
-    FanMailer.proximity_alert(fan, performer, distance_km).deliver_now
-    EventNotification.create!(event_id: event_id, sent_at: Time.current)
+  def send_proximity_alert(fan, performer, event, distance_km)
+    FanMailer.proximity_alert(fan, performer, event, distance_km).deliver_now
+    EventNotification.create!(event_id: event.id, sent_at: Time.current)
   end
 
   # -----------------------------------------------------------------------

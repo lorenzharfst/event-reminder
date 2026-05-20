@@ -1,2 +1,6 @@
 <p><strong><%= @performer_name %></strong> has an upcoming event near you!</p>
+<p>Location: <strong><%= @location %></strong></p>
+<% if @venue.present? %>
+  <p>Venue: <strong><%= @venue %></strong></p>
+<% end %>
 <p>Distance from your location: <strong><%= @distance_km %> km</strong></p>

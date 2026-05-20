@@ -29,6 +29,6 @@ class EventsController < ApplicationController
   private
   # Private method to define which parameters are permitted, this is mandatory.
   def event_params
-    params.expect(event: [ :event_date, :location, :performer_id ])
+    params.expect(event: [ :event_date, :location, :venue, :performer_id ])
   end
 end
