@@ -25,16 +25,17 @@ class RoutingRequestService
   # @param destination [String]  e.g. "Barcelona"
   # @return [RoutingRequest]  the newly created, still-pending record
   # @raise  [InvalidInputError] if either argument is blank
-  def self.call(origin, destination, fan_distance, fan_id, performer_id)
-    new(origin, destination, fan_distance, fan_id, performer_id).call
+  def self.call(origin, destination, fan_distance, fan_id, performer_id, event_id)
+    new(origin, destination, fan_distance, fan_id, performer_id, event_id).call
   end
 
-  def initialize(origin, destination, fan_distance, fan_id, performer_id)
+  def initialize(origin, destination, fan_distance, fan_id, performer_id, event_id)
     @origin        = origin.to_s.strip
     @destination   = destination.to_s.strip
     @fan_distance  = fan_distance
     @fan_id        = fan_id
     @performer_id  = performer_id
+    @event_id      = event_id
   end
 
   def call
@@ -45,7 +46,8 @@ class RoutingRequestService
       @destination,
       @fan_distance,
       @fan_id,
-      @performer_id
+      @performer_id,
+      @event_id
     )
   end
 

@@ -38,18 +38,19 @@ class OsrmRoutingWorker
   # @param fan_distance  [Numeric]  fan's max distance threshold in km
   # @param fan_id        [Integer]  Fan record id
   # @param performer_id  [Integer]  Performer record id
-  def perform(origin, destination, fan_distance, fan_id, performer_id)
+  # @param event_id      [Integer]  Event record id
+  def perform(origin, destination, fan_distance, fan_id, performer_id, event_id)
     enforce_rate_limit!
 
     fan       = Fan.find(fan_id)
     performer = Performer.find(performer_id)
 
     if origin.casecmp?(destination)
-      FanMailer.proximity_alert(fan, performer, 0.0).deliver_later
+      send_proximity_alert(fan, performer, 0.0, event_id)
     else
       result = OsrmRoutingService.call(origin, destination, fan_distance, fan_id)
       if result[:status] == :ok && result[:distance_km] <= fan_distance
-        FanMailer.proximity_alert(fan, performer, result[:distance_km]).deliver_later
+        send_proximity_alert(fan, performer, result[:distance_km], event_id)
       elsif result[:status] != :ok
         puts "Error: #{result[:message]}"
       end
@@ -57,6 +58,15 @@ class OsrmRoutingWorker
   end
 
   private
+
+  # -----------------------------------------------------------------------
+  # Email + persistence
+  # -----------------------------------------------------------------------
+
+  def send_proximity_alert(fan, performer, distance_km, event_id)
+    FanMailer.proximity_alert(fan, performer, distance_km).deliver_now
+    EventNotification.create!(event_id: event_id, sent_at: Time.current)
+  end
 
   # -----------------------------------------------------------------------
   # Rate limiting

@@ -19,7 +19,7 @@ class EventsController < ApplicationController
         logger.debug "No notifications were found with this performer"
       else
         relevant_notifications.each do
-          |n| RoutingRequestService.call(@event.location, n.location, n.distance, n.fan_id, @event.performer.id)
+          |n| RoutingRequestService.call(@event.location, n.location, n.distance, n.fan_id, @event.performer.id, @event.id)
         end
       end
     end
