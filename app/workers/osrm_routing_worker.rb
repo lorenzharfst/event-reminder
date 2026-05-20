@@ -33,24 +33,24 @@ class OsrmRoutingWorker
   # Desired minimum gap between consecutive outbound requests (seconds).
   RATE_LIMIT_SECONDS  = 10
 
-  # @param routing_request_id [Integer]  ActiveRecord id of the pending record
-  # @param origin             [String]   e.g. "Girona"
-  # @param destination        [String]   e.g. "Barcelona"
-  def perform(origin, destination, fan_distance, fan_id)
+  # @param origin        [String]   e.g. "Girona"
+  # @param destination   [String]   e.g. "Barcelona"
+  # @param fan_distance  [Numeric]  fan's max distance threshold in km
+  # @param fan_id        [Integer]  Fan record id
+  # @param performer_id  [Integer]  Performer record id
+  def perform(origin, destination, fan_distance, fan_id, performer_id)
     enforce_rate_limit!
 
+    fan       = Fan.find(fan_id)
+    performer = Performer.find(performer_id)
 
-    puts "Comparing #{origin.capitalize} with #{destination.capitalize}"
     if origin.casecmp?(destination)
-      puts "Fan with id #{fan_id} will get notified for origin, destination: #{origin}, #{destination} as they are the same location"
+      FanMailer.proximity_alert(fan, performer, 0.0).deliver_later
     else
       result = OsrmRoutingService.call(origin, destination, fan_distance, fan_id)
-      if result[:status] == :ok
-        puts "Checking fan with id #{fan_id} with origin: #{origin} destination: #{destination}"
-        if result[:distance_km] <= fan_distance
-          puts "Fan with id #{fan_id} will get notified for origin, destination: #{origin}, #{destination}"
-        end
-      else
+      if result[:status] == :ok && result[:distance_km] <= fan_distance
+        FanMailer.proximity_alert(fan, performer, result[:distance_km]).deliver_later
+      elsif result[:status] != :ok
         puts "Error: #{result[:message]}"
       end
     end
