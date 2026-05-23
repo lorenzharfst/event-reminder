@@ -6,6 +6,11 @@ class NotificationsController < ApplicationController
     @notification.assign_attributes(notification_params.except(:performer_id))
     @notification.save!
     logger.debug "Saved notification with id: #{@notification.id}"
+
+    future_events = performer.events.where("event_date >= ?", Date.current)
+    future_events.each do |event|
+      RoutingRequestService.call(event.location, @notification.location, @notification.distance, @notification.fan.id, performer.id, event.id)
+    end
     # TODO: Decide whether we just put a notification or redirect the fan to their list of notifications
   end
   private
