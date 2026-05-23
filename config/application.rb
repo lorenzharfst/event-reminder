@@ -16,6 +16,8 @@ module EventReminder
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    config.middleware.use Rack::Attack
+
     config.active_job.queue_adapter = :sidekiq
 
     config.i18n.available_locales = %i[en es ca]
