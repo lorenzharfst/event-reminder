@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   # Rerouting devise-specific registration actions to the new generated controllers
   # so we can assign new users to either fan or fan&performer
   # TODO: Do this right without rails breaking
-  devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
 
   # Performers with their nested route event
   resources :performers do

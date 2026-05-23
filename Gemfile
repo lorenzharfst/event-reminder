@@ -67,6 +67,8 @@ group :test do
 end
 
 gem "devise", "~> 5.0"
+gem "omniauth-google-oauth2"
+gem "omniauth-rails_csrf_protection"
 gem "dotenv-rails", groups: [ :development, :test ]
 gem "webmock"
 gem "sidekiq" # Background jobs
