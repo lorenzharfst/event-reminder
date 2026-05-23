@@ -6,7 +6,7 @@ class FanMailer < ApplicationMailer
     @distance_km    = distance_km
     mail(
       to:      fan.user.email,
-      subject: "#{performer.name} is performing near you!"
+      subject: I18n.t("mailer.proximity_alert.subject", performer: performer.name)
     )
   end
 end

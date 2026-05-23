@@ -2,8 +2,8 @@
   <div class="col-12 col-sm-9 col-md-7 col-lg-5">
     <div class="card shadow-sm">
       <div class="card-body p-4">
-        <h2 class="card-title mb-1 fw-bold">Log in</h2>
-        <p class="text-muted small mb-4">Welcome back.</p>
+        <h2 class="card-title mb-1 fw-bold"><%= t("auth.login.title") %></h2>
+        <p class="text-muted small mb-4"><%= t("auth.login.subtitle") %></p>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="mb-3">
@@ -21,7 +21,7 @@
             </div>
           <% end %>
           <div class="d-grid mb-3">
-            <%= f.submit "Log in", class: "btn btn-primary" %>
+            <%= f.submit t("auth.login.submit"), class: "btn btn-primary" %>
           </div>
         <% end %>
 
@@ -36,7 +36,7 @@
               <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
               <path fill="none" d="M0 0h48v48H0z"/>
             </svg>
-            Sign in with Google
+            <%= t("auth.login.sign_in_with_google") %>
           <% end %>
         </div>
 

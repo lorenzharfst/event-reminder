@@ -1,5 +1,5 @@
 <div class="mb-4">
-  <h1 class="fw-bold mb-0">Events for <%= @performer.name %></h1>
+  <h1 class="fw-bold mb-0"><%= t("events.title", performer: @performer.name) %></h1>
   <hr class="mt-2">
 </div>
 
@@ -7,14 +7,14 @@
   <div class="row g-4">
     <div class="col-12 col-lg-6">
       <div class="card shadow-sm h-100">
-        <div class="card-header bg-white fw-semibold border-bottom">Update Stage Name</div>
+        <div class="card-header bg-white fw-semibold border-bottom"><%= t("events.update_stage_name") %></div>
         <div class="card-body">
           <%= form_with model: @performer do |form| %>
             <div class="mb-3">
               <%= form.label :name, class: "form-label" %>
               <%= form.text_field :name, class: "form-control" %>
             </div>
-            <%= form.submit "Update", class: "btn btn-outline-secondary" %>
+            <%= form.submit t("events.update"), class: "btn btn-outline-secondary" %>
           <% end %>
         </div>
       </div>
@@ -22,7 +22,7 @@
 
     <div class="col-12 col-lg-6">
       <div class="card shadow-sm h-100">
-        <div class="card-header bg-white fw-semibold border-bottom">Add New Event</div>
+        <div class="card-header bg-white fw-semibold border-bottom"><%= t("events.add_new_event") %></div>
         <div class="card-body">
           <%= form_with model: @event, url: "/performers/#{@performer.id}/events", method: "post" do |form| %>
             <div class="mb-3">
@@ -33,7 +33,7 @@
                               data-action="click@window->location-autocomplete#clickOutside">
               <%= form.label :location, class: "form-label" %>
               <div class="position-relative">
-                <%= form.search_field :location, class: "form-control", placeholder: "City or region",
+                <%= form.search_field :location, class: "form-control", placeholder: t("events.location_placeholder"),
                       autocomplete: "off",
                       data: {
                         location_autocomplete_target: "input",
@@ -46,9 +46,9 @@
             </div>
             <div class="mb-3">
               <%= form.label :venue, class: "form-label" %>
-              <%= form.text_field :venue, class: "form-control", placeholder: "Venue name (optional)" %>
+              <%= form.text_field :venue, class: "form-control", placeholder: t("events.venue_placeholder") %>
             </div>
-            <%= form.submit "Add Event", class: "btn btn-primary" %>
+            <%= form.submit t("events.add_event"), class: "btn btn-primary" %>
           <% end %>
         </div>
       </div>
@@ -56,7 +56,7 @@
 
     <div class="col-12">
       <div class="card shadow-sm">
-        <div class="card-header bg-white fw-semibold border-bottom">Upcoming Events</div>
+        <div class="card-header bg-white fw-semibold border-bottom"><%= t("events.upcoming_events") %></div>
         <% if @event_list.any? %>
           <ul class="list-group list-group-flush">
             <% @event_list.each do |event| %>
@@ -69,13 +69,13 @@
                 </div>
                 <div class="d-flex align-items-center gap-2">
                   <span class="badge bg-primary rounded-pill"><%= event.event_date.strftime("%b %-d, %Y") %></span>
-                  <%= button_to "Delete", performer_event_path(@performer, event), method: :delete, data: { turbo_confirm: "Delete this event?" }, class: "btn btn-outline-danger btn-sm" %>
+                  <%= button_to t("events.delete"), performer_event_path(@performer, event), method: :delete, data: { turbo_confirm: t("events.delete_confirm") }, class: "btn btn-outline-danger btn-sm" %>
                 </div>
               </li>
             <% end %>
           </ul>
         <% else %>
-          <div class="card-body text-muted fst-italic">No events yet.</div>
+          <div class="card-body text-muted fst-italic"><%= t("events.no_events") %></div>
         <% end %>
       </div>
     </div>

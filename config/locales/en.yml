@@ -1,31 +1,117 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  app_name: "Event Reminder"
+  nav:
+    log_out: "Log out"
+  home:
+    tagline: "Stay close to the music you love."
+  events:
+    title: "Events for %{performer}"
+    update_stage_name: "Update Stage Name"
+    add_new_event: "Add New Event"
+    location_placeholder: "City or region"
+    venue_placeholder: "Venue name (optional)"
+    add_event: "Add Event"
+    update: "Update"
+    upcoming_events: "Upcoming Events"
+    no_events: "No events yet."
+    delete: "Delete"
+    delete_confirm: "Delete this event?"
+  performers:
+    sign_in_to_subscribe: "Sign in to subscribe"
+    sign_in_description: "Log in to get notified when this performer has an event near you."
+    log_in: "Log in"
+    sign_up: "Sign up"
+    notifications_title: "Notifications"
+    notifications_description: "Subscribe to get notified when an event is near your location."
+    setup_notification: "Set up a notification"
+    location_placeholder: "Your city or region"
+    max_distance: "Maximum distance (km)"
+    save_notification: "Save notification"
+  auth:
+    login:
+      title: "Log in"
+      subtitle: "Welcome back."
+      submit: "Log in"
+      sign_in_with_google: "Sign in with Google"
+    signup:
+      title: "Sign up"
+      subtitle: "Create your account to get started."
+      submit: "Sign up"
+      password_hint: "%{count} characters minimum"
+    account:
+      title: "Account settings"
+      edit_header: "Edit %{resource}"
+      password_blank: "Leave blank if you don't want to change it"
+      password_hint: " (%{count} characters minimum)"
+      current_password_hint: "Required to confirm your changes"
+      submit: "Update"
+      back: "Back"
+      danger_zone: "Danger zone"
+      cancel_title: "Cancel account"
+      cancel_description: "This will permanently delete your account."
+      cancel_button: "Cancel my account"
+      cancel_confirm: "Are you sure? This cannot be undone."
+      pending_confirmation: "Currently waiting confirmation for:"
+    forgot_password:
+      title: "Forgot your password?"
+      subtitle: "Enter your email and we'll send you reset instructions."
+      submit: "Send reset instructions"
+    change_password:
+      title: "Change your password"
+      subtitle: "Choose a strong new password."
+      new_password: "New password"
+      confirm_password: "Confirm new password"
+      password_hint: "%{count} characters minimum"
+      submit: "Change my password"
+    resend_confirmation:
+      title: "Resend confirmation"
+      subtitle: "Enter your email to receive a new confirmation link."
+      submit: "Resend confirmation instructions"
+    unlock:
+      title: "Resend unlock instructions"
+      subtitle: "Enter your email to receive a new unlock link."
+      submit: "Resend unlock instructions"
+    links:
+      log_in: "Log in"
+      sign_up: "Sign up"
+      forgot_password: "Forgot your password?"
+      no_confirmation: "Didn't receive confirmation instructions?"
+      no_unlock: "Didn't receive unlock instructions?"
+      sign_in_with: "Sign in with %{provider}"
+  mailer:
+    footer: "You received this email because you subscribed to event notifications on Event Reminder."
+    proximity_alert:
+      subject: "%{performer} is performing near you!"
+      heading: "%{performer} is performing near you!"
+      description: "Great news — there's an upcoming event close to your location."
+      location: "Location"
+      venue: "Venue"
+      distance: "Distance"
+      distance_value: "%{distance} km away"
+      dont_miss: "Don't miss your chance to see %{performer} live!"
+      text_body: "%{performer} has an upcoming event near you!"
+      text_location: "Location: %{location}"
+      text_venue: "Venue: %{venue}"
+      text_distance: "Distance from your location: %{distance} km"
+    confirmation_instructions:
+      heading: "Welcome to Event Reminder!"
+      subtitle: "Thanks for signing up. Please confirm your email address to get started."
+      button: "Confirm my account"
+      ignore: "If you didn't create this account you can safely ignore this email."
+    reset_password:
+      heading: "Reset your password"
+      subtitle: "Someone requested a password reset for %{email}. Click the button below to choose a new one."
+      button: "Change my password"
+      ignore: "If you didn't request this, you can safely ignore this email — your password will remain unchanged."
+    email_changed:
+      heading: "Email address updated"
+      being_changed: "We're letting you know that your email address is being changed to %{email}. You'll receive a confirmation link at the new address."
+      changed: "We're letting you know that your email address has been updated to %{email}."
+    password_changed:
+      heading: "Password changed"
+      body: "We're letting you know that the password for %{email} was recently changed. If this wasn't you, please reset your password immediately."
+    unlock_instructions:
+      heading: "Your account has been locked"
+      subtitle: "Your account (%{email}) was locked due to too many failed sign-in attempts. Click below to unlock it."
+      button: "Unlock my account"
+      ignore: "If you didn't request this, please contact support."

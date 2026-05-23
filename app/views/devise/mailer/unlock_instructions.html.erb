@@ -1,9 +1,9 @@
-<p style="margin:0 0 8px;font-size:20px;font-weight:700;color:#212529;">Your account has been locked</p>
-<p style="margin:0 0 24px;font-size:15px;color:#6c757d;">Your account (<strong style="color:#212529;"><%= @resource.email %></strong>) was locked due to too many failed sign-in attempts. Click below to unlock it.</p>
+<p style="margin:0 0 8px;font-size:20px;font-weight:700;color:#212529;"><%= t("mailer.unlock_instructions.heading") %></p>
+<p style="margin:0 0 24px;font-size:15px;color:#6c757d;"><%= t("mailer.unlock_instructions.subtitle", email: @resource.email) %></p>
 
 <p style="margin:0 0 28px;text-align:center;">
-  <%= link_to "Unlock my account", unlock_url(@resource, unlock_token: @token),
+  <%= link_to t("mailer.unlock_instructions.button"), unlock_url(@resource, unlock_token: @token),
       style: "display:inline-block;background-color:#0d6efd;color:#ffffff;padding:12px 28px;border-radius:6px;text-decoration:none;font-size:15px;font-weight:600;" %>
 </p>
 
-<p style="margin:0;font-size:13px;color:#adb5bd;">If you didn't request this, please contact support.</p>
+<p style="margin:0;font-size:13px;color:#adb5bd;"><%= t("mailer.unlock_instructions.ignore") %></p>

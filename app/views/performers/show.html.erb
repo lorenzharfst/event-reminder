@@ -3,10 +3,10 @@
     <div class="col-12 col-sm-9 col-md-7 col-lg-5">
       <div class="card shadow-sm text-center">
         <div class="card-body p-5">
-          <h2 class="card-title fw-bold mb-2">Sign in to subscribe</h2>
-          <p class="text-muted mb-4">Log in to get notified when this performer has an event near you.</p>
-          <%= link_to "Log in", new_user_session_path, class: "btn btn-primary me-2" %>
-          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-outline-secondary" %>
+          <h2 class="card-title fw-bold mb-2"><%= t("performers.sign_in_to_subscribe") %></h2>
+          <p class="text-muted mb-4"><%= t("performers.sign_in_description") %></p>
+          <%= link_to t("performers.log_in"), new_user_session_path, class: "btn btn-primary me-2" %>
+          <%= link_to t("performers.sign_up"), new_user_registration_path, class: "btn btn-outline-secondary" %>
         </div>
       </div>
     </div>
@@ -15,23 +15,23 @@
 <% elsif user_signed_in? %>
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
-      <h1 class="fw-bold mb-1">Notifications</h1>
-      <p class="text-muted mb-4">Subscribe to get notified when an event is near your location.</p>
+      <h1 class="fw-bold mb-1"><%= t("performers.notifications_title") %></h1>
+      <p class="text-muted mb-4"><%= t("performers.notifications_description") %></p>
 
       <div class="card shadow-sm">
-        <div class="card-header bg-white fw-semibold border-bottom">Set up a notification</div>
+        <div class="card-header bg-white fw-semibold border-bottom"><%= t("performers.setup_notification") %></div>
         <div class="card-body">
           <%= form_with model: @notification do |form| %>
             <div class="mb-3">
               <%= form.label :location, class: "form-label" %>
-              <%= form.search_field :location, class: "form-control", placeholder: "Your city or region" %>
+              <%= form.search_field :location, class: "form-control", placeholder: t("performers.location_placeholder") %>
             </div>
             <div class="mb-3">
-              <%= form.label :distance, "Maximum distance (km)", class: "form-label" %>
+              <%= form.label :distance, t("performers.max_distance"), class: "form-label" %>
               <%= form.number_field :distance, in: 0.0..1000.0, step: 5, class: "form-control" %>
             </div>
             <input type="hidden" id="performer_id" name="notification[performer_id]" value="<%= @performer.id %>">
-            <%= form.submit "Save notification", class: "btn btn-primary" %>
+            <%= form.submit t("performers.save_notification"), class: "btn btn-primary" %>
           <% end %>
         </div>
       </div>

@@ -1,9 +1,9 @@
 <div class="row justify-content-center">
   <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-    <h2 class="fw-bold mb-4">Account settings</h2>
+    <h2 class="fw-bold mb-4"><%= t("auth.account.title") %></h2>
 
     <div class="card shadow-sm mb-4">
-      <div class="card-header bg-white fw-semibold border-bottom">Edit <%= resource_name.to_s.humanize %></div>
+      <div class="card-header bg-white fw-semibold border-bottom"><%= t("auth.account.edit_header", resource: resource_name.to_s.humanize) %></div>
       <div class="card-body p-4">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
@@ -14,12 +14,12 @@
           </div>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div class="alert alert-info small">Currently waiting confirmation for: <strong><%= resource.unconfirmed_email %></strong></div>
+            <div class="alert alert-info small"><%= t("auth.account.pending_confirmation") %> <strong><%= resource.unconfirmed_email %></strong></div>
           <% end %>
 
           <div class="mb-3">
             <%= f.label :password, class: "form-label" %>
-            <div class="form-text mb-1">Leave blank if you don't want to change it<%= " (#{@minimum_password_length} characters minimum)" if @minimum_password_length %></div>
+            <div class="form-text mb-1"><%= t("auth.account.password_blank") %><%= t("auth.account.password_hint", count: @minimum_password_length) if @minimum_password_length %></div>
             <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
           </div>
           <div class="mb-3">
@@ -28,29 +28,29 @@
           </div>
           <div class="mb-3">
             <%= f.label :current_password, class: "form-label" %>
-            <div class="form-text mb-1">Required to confirm your changes</div>
+            <div class="form-text mb-1"><%= t("auth.account.current_password_hint") %></div>
             <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
           </div>
           <div class="d-grid">
-            <%= f.submit "Update", class: "btn btn-primary" %>
+            <%= f.submit t("auth.account.submit"), class: "btn btn-primary" %>
           </div>
         <% end %>
       </div>
     </div>
 
     <div class="card shadow-sm border-danger">
-      <div class="card-header bg-white fw-semibold border-bottom text-danger">Danger zone</div>
+      <div class="card-header bg-white fw-semibold border-bottom text-danger"><%= t("auth.account.danger_zone") %></div>
       <div class="card-body p-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
         <div>
-          <p class="mb-0 fw-medium">Cancel account</p>
-          <p class="mb-0 text-muted small">This will permanently delete your account.</p>
+          <p class="mb-0 fw-medium"><%= t("auth.account.cancel_title") %></p>
+          <p class="mb-0 text-muted small"><%= t("auth.account.cancel_description") %></p>
         </div>
-        <%= button_to "Cancel my account", registration_path(resource_name), data: { turbo_confirm: "Are you sure? This cannot be undone." }, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+        <%= button_to t("auth.account.cancel_button"), registration_path(resource_name), data: { turbo_confirm: t("auth.account.cancel_confirm") }, method: :delete, class: "btn btn-outline-danger btn-sm" %>
       </div>
     </div>
 
     <div class="mt-3">
-      <%= link_to "Back", :back, class: "btn btn-link text-muted ps-0" %>
+      <%= link_to t("auth.account.back"), :back, class: "btn btn-link text-muted ps-0" %>
     </div>
   </div>
 </div>

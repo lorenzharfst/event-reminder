@@ -1,6 +1,6 @@
-<p style="margin:0 0 8px;font-size:20px;font-weight:700;color:#212529;">Email address updated</p>
+<p style="margin:0 0 8px;font-size:20px;font-weight:700;color:#212529;"><%= t("mailer.email_changed.heading") %></p>
 <% if @resource.try(:unconfirmed_email?) %>
-  <p style="margin:0;font-size:15px;color:#6c757d;">We're letting you know that your email address is being changed to <strong style="color:#212529;"><%= @resource.unconfirmed_email %></strong>. You'll receive a confirmation link at the new address.</p>
+  <p style="margin:0;font-size:15px;color:#6c757d;"><%= t("mailer.email_changed.being_changed", email: @resource.unconfirmed_email) %></p>
 <% else %>
-  <p style="margin:0;font-size:15px;color:#6c757d;">We're letting you know that your email address has been updated to <strong style="color:#212529;"><%= @resource.email %></strong>.</p>
+  <p style="margin:0;font-size:15px;color:#6c757d;"><%= t("mailer.email_changed.changed", email: @resource.email) %></p>
 <% end %>

@@ -1,23 +1,24 @@
-<h2 style="margin:0 0 8px;color:#212529;font-size:22px;font-weight:700;line-height:1.3;"><%= @performer_name %> is performing near you!</h2>
-<p style="margin:0 0 28px;color:#6c757d;font-size:15px;">Great news — there's an upcoming event close to your location.</p>
+<h2 style="margin:0 0 8px;color:#212529;font-size:22px;font-weight:700;line-height:1.3;"><%= t("mailer.proximity_alert.heading", performer: @performer_name) %></h2>
+<p style="margin:0 0 28px;color:#6c757d;font-size:15px;"><%= t("mailer.proximity_alert.description") %></p>
 
 <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f8f9fa;border-radius:8px;padding:4px 20px;margin-bottom:28px;">
   <tr>
-    <td style="padding:12px 0;color:#6c757d;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;width:90px;vertical-align:middle;border-bottom:1px solid #e9ecef;">Location</td>
+    <td style="padding:12px 0;color:#6c757d;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;width:90px;vertical-align:middle;border-bottom:1px solid #e9ecef;"><%= t("mailer.proximity_alert.location") %></td>
     <td style="padding:12px 0;color:#212529;font-size:15px;font-weight:600;vertical-align:middle;border-bottom:1px solid #e9ecef;"><%= @location %></td>
   </tr>
   <% if @venue.present? %>
   <tr>
-    <td style="padding:12px 0;color:#6c757d;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;vertical-align:middle;border-bottom:1px solid #e9ecef;">Venue</td>
+    <td style="padding:12px 0;color:#6c757d;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;vertical-align:middle;border-bottom:1px solid #e9ecef;"><%= t("mailer.proximity_alert.venue") %></td>
     <td style="padding:12px 0;color:#212529;font-size:15px;font-weight:600;vertical-align:middle;border-bottom:1px solid #e9ecef;"><%= @venue %></td>
   </tr>
   <% end %>
   <tr>
-    <td style="padding:12px 0;color:#6c757d;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;vertical-align:middle;">Distance</td>
+    <td style="padding:12px 0;color:#6c757d;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;vertical-align:middle;"><%= t("mailer.proximity_alert.distance") %></td>
     <td style="padding:12px 0;vertical-align:middle;">
-      <span style="display:inline-block;background-color:#0d6efd;color:#ffffff;padding:3px 12px;border-radius:20px;font-size:13px;font-weight:600;"><%= @distance_km %> km away</span>
+      <span style="display:inline-block;background-color:#0d6efd;color:#ffffff;padding:3px 12px;border-radius:20px;font-size:13px;font-weight:600;"><%= t("mailer.proximity_alert.distance_value", distance: @distance_km) %></span>
     </td>
   </tr>
 </table>
 
-<p style="margin:0;color:#6c757d;font-size:14px;line-height:1.6;">Don't miss your chance to see <strong style="color:#212529;"><%= @performer_name %></strong> live!</p>
+<% dont_miss_parts = t("mailer.proximity_alert.dont_miss").split("%{performer}") %>
+<p style="margin:0;color:#6c757d;font-size:14px;line-height:1.6;"><%= dont_miss_parts[0] %><strong style="color:#212529;"><%= @performer_name %></strong><%= dont_miss_parts[1] %></p>
