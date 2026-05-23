@@ -3,6 +3,7 @@ class FanMailer < ApplicationMailer
     @performer_name = performer.name
     @location       = event.location
     @venue          = event.venue
+    @event_date     = event.event_date
     @distance_km    = distance_km
     mail(
       to:      fan.user.email,

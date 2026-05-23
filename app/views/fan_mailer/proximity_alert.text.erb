@@ -1,4 +1,5 @@
 <%= t("mailer.proximity_alert.text_body", performer: @performer_name) %>
+<%= t("mailer.proximity_alert.text_date", date: l(@event_date, format: :long)) %>
 <%= t("mailer.proximity_alert.text_location", location: @location) %>
 <% if @venue.present? %><%= t("mailer.proximity_alert.text_venue", venue: @venue) %>
 <% end %><%= t("mailer.proximity_alert.text_distance", distance: @distance_km) %>

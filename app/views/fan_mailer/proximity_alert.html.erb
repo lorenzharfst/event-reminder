@@ -3,6 +3,10 @@
 
 <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f8f9fa;border-radius:8px;padding:4px 20px;margin-bottom:28px;">
   <tr>
+    <td style="padding:12px 0;color:#6c757d;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;width:90px;vertical-align:middle;border-bottom:1px solid #e9ecef;"><%= t("mailer.proximity_alert.date") %></td>
+    <td style="padding:12px 0;color:#212529;font-size:15px;font-weight:600;vertical-align:middle;border-bottom:1px solid #e9ecef;"><%= l(@event_date, format: :long) %></td>
+  </tr>
+  <tr>
     <td style="padding:12px 0;color:#6c757d;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.6px;width:90px;vertical-align:middle;border-bottom:1px solid #e9ecef;"><%= t("mailer.proximity_alert.location") %></td>
     <td style="padding:12px 0;color:#212529;font-size:15px;font-weight:600;vertical-align:middle;border-bottom:1px solid #e9ecef;"><%= @location %></td>
   </tr>
