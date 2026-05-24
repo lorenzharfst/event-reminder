@@ -22,10 +22,10 @@ en:
     log_in: "Log in"
     sign_up: "Sign up"
     notifications_title: "Notifications"
-    notifications_description: "Subscribe to get notified when an event is near your location."
+    notifications_description: "Get notified when %{performer} performs near you!"
     setup_notification: "Set up a notification"
     location_placeholder: "Your city or region"
-    max_distance: "Maximum distance (km)"
+    max_distance: "Minutes away by car"
     save_notification: "Save notification"
     performer_cta: "You're a performer and want such a link too? Get your own for free here!"
   auth:

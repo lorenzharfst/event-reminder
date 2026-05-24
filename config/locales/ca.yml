@@ -22,10 +22,10 @@ ca:
     log_in: "Iniciar sessió"
     sign_up: "Registrar-se"
     notifications_title: "Notificacions"
-    notifications_description: "Subscriu-te per rebre notificacions quan hi hagi un esdeveniment a prop de la teva ubicació."
+    notifications_description: "Rep una notificació quan %{performer} actuï a prop teu!"
     setup_notification: "Configurar una notificació"
     location_placeholder: "La teva ciutat o regió"
-    max_distance: "Distància màxima (km)"
+    max_distance: "Minuts en cotxe"
     save_notification: "Desar notificació"
     performer_cta: "Ets artista i vols un enllaç així també? Aconsegueix el teu gratis aquí!"
   auth:

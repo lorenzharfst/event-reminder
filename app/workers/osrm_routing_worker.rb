@@ -50,7 +50,7 @@ class OsrmRoutingWorker
       send_proximity_alert(fan, performer, event, 0.0)
     else
       result = OsrmRoutingService.call(origin, destination, fan_distance, fan_id)
-      if result[:status] == :ok && result[:distance_km] <= fan_distance
+      if result[:status] == :ok && result[:duration_minutes] <= fan_distance
         send_proximity_alert(fan, performer, event, result[:distance_km])
       elsif result[:status] != :ok
         puts "Error: #{result[:message]}"

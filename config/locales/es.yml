@@ -22,10 +22,10 @@ es:
     log_in: "Iniciar sesión"
     sign_up: "Registrarse"
     notifications_title: "Notificaciones"
-    notifications_description: "Suscríbete para recibir notificaciones cuando haya un evento cerca de tu ubicación."
+    notifications_description: "¡Recibe una notificación cuando %{performer} actúe cerca de ti!"
     setup_notification: "Configurar una notificación"
     location_placeholder: "Tu ciudad o región"
-    max_distance: "Distancia máxima (km)"
+    max_distance: "Minutos en coche"
     save_notification: "Guardar notificación"
     performer_cta: "¿Eres artista y quieres un enlace así también? ¡Consigue el tuyo gratis aquí!"
   auth:
