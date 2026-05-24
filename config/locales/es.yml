@@ -38,6 +38,7 @@ es:
       title: "Registrarse"
       subtitle: "Crea tu cuenta para empezar."
       submit: "Registrarse"
+      sign_up_with_google: "Registrarse con Google"
       password_hint: "Mínimo %{count} caracteres"
     account:
       title: "Configuración de cuenta"

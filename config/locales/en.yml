@@ -38,6 +38,7 @@ en:
       title: "Sign up"
       subtitle: "Create your account to get started."
       submit: "Sign up"
+      sign_up_with_google: "Sign up with Google"
       password_hint: "%{count} characters minimum"
     account:
       title: "Account settings"

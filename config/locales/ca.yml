@@ -38,6 +38,7 @@ ca:
       title: "Registrar-se"
       subtitle: "Crea el teu compte per començar."
       submit: "Registrar-se"
+      sign_up_with_google: "Registrar-se amb Google"
       password_hint: "Mínim %{count} caràcters"
     account:
       title: "Configuració del compte"
