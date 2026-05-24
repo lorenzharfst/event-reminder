@@ -27,6 +27,7 @@ es:
     location_placeholder: "Tu ciudad o región"
     max_distance: "Distancia máxima (km)"
     save_notification: "Guardar notificación"
+    performer_cta: "¿Eres artista y quieres un enlace así también? ¡Consigue el tuyo gratis aquí!"
   auth:
     login:
       title: "Iniciar sesión"

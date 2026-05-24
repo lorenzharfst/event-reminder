@@ -27,6 +27,7 @@ ca:
     location_placeholder: "La teva ciutat o regió"
     max_distance: "Distància màxima (km)"
     save_notification: "Desar notificació"
+    performer_cta: "Ets artista i vols un enllaç així també? Aconsegueix el teu gratis aquí!"
   auth:
     login:
       title: "Iniciar sessió"

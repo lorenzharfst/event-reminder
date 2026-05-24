@@ -27,6 +27,7 @@ en:
     location_placeholder: "Your city or region"
     max_distance: "Maximum distance (km)"
     save_notification: "Save notification"
+    performer_cta: "You're a performer and want such a link too? Get your own for free here!"
   auth:
     login:
       title: "Log in"
