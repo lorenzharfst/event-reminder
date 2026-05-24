@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <h1 class="fw-bold mb-4"><%= t("notifications.edit_title", performer: @notification.performer.name) %></h1>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <%= form_with model: @notification do |form| %>
+          <div class="mb-3" data-controller="location-autocomplete"
+                            data-action="click@window->location-autocomplete#clickOutside">
+            <%= form.label :location, class: "form-label" %>
+            <div class="position-relative">
+              <%= form.search_field :location, class: "form-control",
+                    placeholder: t("performers.location_placeholder"),
+                    autocomplete: "off",
+                    data: {
+                      location_autocomplete_target: "input",
+                      action: "input->location-autocomplete#onInput"
+                    } %>
+              <div data-location-autocomplete-target="dropdown"
+                   class="dropdown-menu w-100"
+                   style="top:100%;max-height:220px;overflow-y:auto;"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <%= form.label :distance, t("performers.max_distance"), class: "form-label" %>
+            <%= form.number_field :distance, in: 0.0..1000.0, step: 5, class: "form-control" %>
+          </div>
+          <div class="d-flex gap-2">
+            <%= form.submit t("notifications.save"), class: "btn btn-primary" %>
+            <%= link_to t("notifications.back"), notifications_path, class: "btn btn-outline-secondary" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

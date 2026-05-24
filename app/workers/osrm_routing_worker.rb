@@ -15,10 +15,6 @@
 #      remainder. This is a safety net; with concurrency 1 it will only ever
 #      trigger on the very first job after a cold start or a long idle period.
 #
-#   3. Result persistence
-#      Results (and errors) are written to a `routing_requests` table so the
-#      calling code can retrieve them asynchronously via polling or ActionCable.
-#      Adjust #persist_result / #persist_error to match your own model.
 
 class OsrmRoutingWorker
   include Sidekiq::Worker
@@ -53,7 +49,7 @@ class OsrmRoutingWorker
       if result[:status] == :ok && result[:duration_minutes] <= fan_distance
         send_proximity_alert(fan, performer, event, result[:distance_km])
       elsif result[:status] != :ok
-        puts "Error: #{result[:message]}"
+        logger.error "OsrmRoutingWorker: #{result[:message]}"
       end
     end
   end
@@ -68,8 +64,10 @@ class OsrmRoutingWorker
     return if event.event_date < Date.current
     return if EventNotification.already_sent?(fan.id, event.event_date, event.location, event.performer_id)
 
-    FanMailer.proximity_alert(fan, performer, event, distance_km).deliver_now
-    EventNotification.create!(event_id: event.id, fan_id: fan.id, sent_at: Time.current)
+    ActiveRecord::Base.transaction do
+      EventNotification.create!(event_id: event.id, fan_id: fan.id, sent_at: Time.current)
+      FanMailer.proximity_alert(fan, performer, event, distance_km).deliver_now
+    end
   end
 
   # -----------------------------------------------------------------------
@@ -95,37 +93,5 @@ class OsrmRoutingWorker
   # which adapter is configured (works with both redis-client and redis gems).
   def redis(&block)
     Sidekiq.redis(&block)
-  end
-
-  # -----------------------------------------------------------------------
-  # Result persistence — adapt to your own model / schema
-  # -----------------------------------------------------------------------
-
-  # Schema assumed:
-  #
-  #   create_table :routing_requests do |t|
-  #     t.string  :origin,           null: false
-  #     t.string  :destination,      null: false
-  #     t.string  :status,           null: false, default: "pending"
-  #     t.decimal :distance_km,      precision: 10, scale: 1
-  #     t.decimal :duration_minutes, precision: 10, scale: 1
-  #     t.text    :error_message
-  #     t.timestamps
-  #   end
-
-  # TODO: Delete once I'm sure it's not needed
-  def persist_result(id, result)
-    RoutingRequest.find(id).update!(
-      status:           "completed",
-      distance_km:      result[:distance_km],
-      duration_minutes: result[:duration_minutes]
-    )
-  end
-
-  def persist_error(id, message)
-    RoutingRequest.find(id).update!(
-      status:        "failed",
-      error_message: message
-    )
   end
 end

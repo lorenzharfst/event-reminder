@@ -9,6 +9,6 @@ class HomeController < ApplicationController
       @performer_id = current_user.performer.id
     end
     logger.debug "Loading homepage for performer id: #{@performer_id}"
-    redirect_to performer_path(current_user.performer)
+    redirect_to performer_events_path(current_user.performer)
   end
 end

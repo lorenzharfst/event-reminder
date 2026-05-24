@@ -2,6 +2,18 @@ es:
   app_name: "Event Reminder"
   nav:
     log_out: "Cerrar sesión"
+    manage_events: "Gestionar eventos"
+    manage_notifications: "Gestionar mis notificaciones"
+  notifications:
+    title: "Mis notificaciones"
+    edit_title: "Editar notificación para %{performer}"
+    none: "Aún no tienes notificaciones configuradas."
+    edit: "Editar"
+    delete: "Eliminar"
+    delete_confirm: "¿Eliminar esta notificación?"
+    save: "Guardar"
+    back: "Volver"
+    minutes_unit: "min"
   home:
     tagline: "Mantente cerca de la música que amas."
   events:
@@ -92,6 +104,8 @@ es:
       distance: "Distancia"
       distance_value: "%{distance} km de distancia"
       dont_miss: "¡No pierdas la oportunidad de ver a %{performer} en directo!"
+      manage_notifications_prompt: "¿Quieres editar tus notificaciones? Haz clic"
+      manage_notifications_link: "aquí"
       text_body: "¡%{performer} tiene un próximo evento cerca de ti!"
       text_date: "Fecha: %{date}"
       text_location: "Ubicación: %{location}"

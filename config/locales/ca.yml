@@ -2,6 +2,18 @@ ca:
   app_name: "Event Reminder"
   nav:
     log_out: "Tancar sessió"
+    manage_events: "Gestionar esdeveniments"
+    manage_notifications: "Gestionar les meves notificacions"
+  notifications:
+    title: "Les meves notificacions"
+    edit_title: "Editar notificació per a %{performer}"
+    none: "Encara no tens cap notificació configurada."
+    edit: "Editar"
+    delete: "Eliminar"
+    delete_confirm: "Eliminar aquesta notificació?"
+    save: "Desar"
+    back: "Tornar"
+    minutes_unit: "min"
   home:
     tagline: "Mantén-te a prop de la música que estimes."
   events:
@@ -92,6 +104,8 @@ ca:
       distance: "Distància"
       distance_value: "%{distance} km de distància"
       dont_miss: "No et perdis l'oportunitat de veure %{performer} en directe!"
+      manage_notifications_prompt: "Vols editar les teves notificacions? Fes clic"
+      manage_notifications_link: "aquí"
       text_body: "%{performer} té un proper esdeveniment a prop teu!"
       text_date: "Data: %{date}"
       text_location: "Ubicació: %{location}"

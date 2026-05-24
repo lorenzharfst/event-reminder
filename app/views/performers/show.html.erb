@@ -1,3 +1,9 @@
+<% if user_signed_in? && current_user.performer == @performer %>
+  <% content_for :nav_extras do %>
+    <%= link_to t("nav.manage_events"), performer_events_path(@performer), class: "btn btn-outline-secondary btn-sm" %>
+  <% end %>
+<% end %>
+
 <% if user_signed_in? %>
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">

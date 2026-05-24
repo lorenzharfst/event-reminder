@@ -1,0 +1,30 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <h1 class="fw-bold mb-4"><%= t("notifications.title") %></h1>
+
+    <% if @notifications.any? %>
+      <div class="card shadow-sm">
+        <ul class="list-group list-group-flush">
+          <% @notifications.each do |notification| %>
+            <li class="list-group-item py-3">
+              <div class="d-flex justify-content-between align-items-start gap-3">
+                <div>
+                  <div class="fw-semibold"><%= notification.performer.name %></div>
+                  <div class="text-muted small"><%= notification.location %> &middot; <%= notification.distance %> <%= t("notifications.minutes_unit") %></div>
+                </div>
+                <div class="d-flex gap-2 flex-shrink-0">
+                  <%= link_to t("notifications.edit"), edit_notification_path(notification), class: "btn btn-outline-secondary btn-sm" %>
+                  <%= button_to t("notifications.delete"), notification_path(notification), method: :delete,
+                        data: { turbo_confirm: t("notifications.delete_confirm") },
+                        class: "btn btn-outline-danger btn-sm" %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% else %>
+      <p class="text-muted fst-italic"><%= t("notifications.none") %></p>
+    <% end %>
+  </div>
+</div>

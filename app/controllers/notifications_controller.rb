@@ -1,4 +1,27 @@
 class NotificationsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_notification, only: [ :edit, :update, :destroy ]
+
+  def index
+    @notifications = current_user.fan.notifications.includes(:performer)
+  end
+
+  def edit
+  end
+
+  def update
+    if @notification.update(notification_update_params)
+      redirect_to notifications_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @notification.destroy
+    redirect_to notifications_path
+  end
+
   def create
     logger.debug "Creating a new notification with location: #{notification_params[:location]}, distance: #{notification_params[:distance]}, performer_id: #{notification_params[:performer_id]}"
     performer = Performer.find_by(id: notification_params[:performer_id])
@@ -14,7 +37,16 @@ class NotificationsController < ApplicationController
     # TODO: Decide whether we just put a notification or redirect the fan to their list of notifications
   end
   private
+
+  def set_notification
+    @notification = current_user.fan.notifications.find(params[:id])
+  end
+
   def notification_params
     params.expect(notification: [ :distance, :location, :performer_id ])
+  end
+
+  def notification_update_params
+    params.expect(notification: [ :distance, :location ])
   end
 end

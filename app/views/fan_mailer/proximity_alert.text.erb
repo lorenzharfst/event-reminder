@@ -3,3 +3,4 @@
 <%= t("mailer.proximity_alert.text_location", location: @location) %>
 <% if @venue.present? %><%= t("mailer.proximity_alert.text_venue", venue: @venue) %>
 <% end %><%= t("mailer.proximity_alert.text_distance", distance: @distance_km) %>
+<%= t("mailer.proximity_alert.manage_notifications_prompt") %> <%= t("mailer.proximity_alert.manage_notifications_link") %>: <%= notifications_url %>
