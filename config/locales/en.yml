@@ -2,7 +2,7 @@ en:
   app_name: "Event Reminder"
   nav:
     log_out: "Log out"
-    manage_events: "Manage events"
+    manage_events: "Manage my events"
     manage_notifications: "Manage my notifications"
   notifications:
     title: "My Notifications"
