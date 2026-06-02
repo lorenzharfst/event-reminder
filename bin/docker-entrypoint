@@ -1,5 +1,12 @@
 #!/bin/bash -e
 
+# Start the embedded PostgreSQL server
+PG_VERSION=$(ls /etc/postgresql/ | head -1)
+su - postgres -c "/usr/lib/postgresql/${PG_VERSION}/bin/pg_ctl -D /var/lib/postgresql/${PG_VERSION}/main -w start"
+
+# Set the postgres user password from the injected secret
+su - postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD '${DB_PASSWORD}';\""
+
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare
