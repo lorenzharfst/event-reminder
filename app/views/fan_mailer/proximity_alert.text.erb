@@ -4,3 +4,6 @@
 <% if @venue.present? %><%= t("mailer.proximity_alert.text_venue", venue: @venue) %>
 <% end %><%= t("mailer.proximity_alert.text_distance", distance: @distance_km) %>
 <%= t("mailer.proximity_alert.manage_notifications_prompt") %> <%= t("mailer.proximity_alert.manage_notifications_link") %>: <%= notifications_url %>
+<% if @unsubscribe_token %>
+<%= t("mailer.proximity_alert.unsubscribe_prompt") %> <%= t("mailer.proximity_alert.unsubscribe_link") %>: <%= unsubscribe_notification_url(token: @unsubscribe_token) %>
+<% end %>

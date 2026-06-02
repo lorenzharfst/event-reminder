@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [ :unsubscribe ]
   before_action :set_notification, only: [ :edit, :update, :destroy ]
 
   def index
@@ -20,6 +20,16 @@ class NotificationsController < ApplicationController
   def destroy
     @notification.destroy
     redirect_to notifications_path
+  end
+
+  def unsubscribe
+    notification = Notification.find_signed(params[:token], purpose: :unsubscribe)
+    if notification
+      notification.destroy
+      redirect_to root_path, notice: t("notifications.unsubscribed")
+    else
+      redirect_to root_path, alert: t("notifications.unsubscribe_invalid")
+    end
   end
 
   def create

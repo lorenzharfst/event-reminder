@@ -14,6 +14,8 @@ es:
     save: "Guardar"
     back: "Volver"
     minutes_unit: "min"
+    unsubscribed: "Has sido dado de baja de esta notificación."
+    unsubscribe_invalid: "Este enlace de cancelación no es válido o ha expirado."
   home:
     tagline: "Mantente cerca de la música que amas."
   events:
@@ -106,6 +108,8 @@ es:
       dont_miss: "¡No pierdas la oportunidad de ver a %{performer} en directo!"
       manage_notifications_prompt: "¿Quieres editar tus notificaciones? Haz clic"
       manage_notifications_link: "aquí"
+      unsubscribe_prompt: "Para dejar de recibir estas alertas"
+      unsubscribe_link: "cancela tu suscripción"
       text_body: "¡%{performer} tiene un próximo evento cerca de ti!"
       text_date: "Fecha: %{date}"
       text_location: "Ubicación: %{location}"

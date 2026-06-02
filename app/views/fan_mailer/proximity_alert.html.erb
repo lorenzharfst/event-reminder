@@ -24,3 +24,7 @@
 </table>
 
 <p style="margin:0;color:#6c757d;font-size:14px;line-height:1.6;"><%= t("mailer.proximity_alert.manage_notifications_prompt") %> <a href="<%= notifications_url %>" style="color:#0d6efd;"><%= t("mailer.proximity_alert.manage_notifications_link") %></a>!</p>
+
+<% if @unsubscribe_token %>
+<p style="margin:16px 0 0;color:#adb5bd;font-size:12px;line-height:1.6;"><%= t("mailer.proximity_alert.unsubscribe_prompt") %> <a href="<%= unsubscribe_notification_url(token: @unsubscribe_token) %>" style="color:#adb5bd;"><%= t("mailer.proximity_alert.unsubscribe_link") %></a>.</p>
+<% end %>

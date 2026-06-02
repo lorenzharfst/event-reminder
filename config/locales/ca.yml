@@ -14,6 +14,8 @@ ca:
     save: "Desar"
     back: "Tornar"
     minutes_unit: "min"
+    unsubscribed: "T'has donat de baixa d'aquesta notificació."
+    unsubscribe_invalid: "Aquest enllaç de cancel·lació no és vàlid o ha expirat."
   home:
     tagline: "Mantén-te a prop de la música que estimes."
   events:
@@ -106,6 +108,8 @@ ca:
       dont_miss: "No et perdis l'oportunitat de veure %{performer} en directe!"
       manage_notifications_prompt: "Vols editar les teves notificacions? Fes clic"
       manage_notifications_link: "aquí"
+      unsubscribe_prompt: "Per deixar de rebre aquestes alertes"
+      unsubscribe_link: "cancel·la la subscripció"
       text_body: "%{performer} té un proper esdeveniment a prop teu!"
       text_date: "Data: %{date}"
       text_location: "Ubicació: %{location}"

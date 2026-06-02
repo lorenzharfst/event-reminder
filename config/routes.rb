@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :events, only: [ :create, :update, :index, :destroy ]
   end
 
+  get "notifications/unsubscribe/:token", to: "notifications#unsubscribe", as: :unsubscribe_notification
   resources :notifications
   # The call to resolve is necessary for converting instances of Event to singular routes through record identification. (Taken from the documentation)
   resolve("Event") { [ :event ] }
