@@ -1,6 +1,4 @@
-Rack::Attack.cache.store = ActiveSupport::Cache::RedisCacheStore.new(
-  url: ENV.fetch("REDIS_URL", "redis://localhost:6379/1")
-)
+Rack::Attack.cache.store = Rails.cache
 
 # General request throttle per IP
 Rack::Attack.throttle("req/ip", limit: 300, period: 5.minutes) do |req|

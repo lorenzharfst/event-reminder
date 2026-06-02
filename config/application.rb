@@ -18,8 +18,6 @@ module EventReminder
 
     config.middleware.use Rack::Attack
 
-    config.active_job.queue_adapter = :sidekiq
-
     config.i18n.available_locales = %i[en es ca]
     config.i18n.default_locale = :en
 

@@ -5,29 +5,26 @@
 #
 # Design decisions:
 #
-#   1. concurrency: 1  (enforced via sidekiq.yml — see below)
+#   1. threads: 1  (enforced via config/queue.yml for the "osrm" queue)
 #      Only one instance of this worker runs at a time, so there is no need
 #      for distributed locks. Jobs execute one-by-one in FIFO order.
 #
-#   2. Redis timestamp gate
+#   2. Rails.cache timestamp gate
 #      Before every OSRM call the worker reads the last-request timestamp from
-#      Redis. If fewer than RATE_LIMIT_SECONDS have elapsed it sleeps the
-#      remainder. This is a safety net; with concurrency 1 it will only ever
+#      the cache. If fewer than RATE_LIMIT_SECONDS have elapsed it sleeps the
+#      remainder. This is a safety net; with threads: 1 it will only ever
 #      trigger on the very first job after a cold start or a long idle period.
 #
 
-class OsrmRoutingWorker
-  include Sidekiq::Worker
+class OsrmRoutingWorker < ApplicationJob
+  queue_as :osrm
+  retry_on StandardError, attempts: 3
 
-  # All OSRM jobs share one dedicated queue.  Setting concurrency to 1 in
-  # sidekiq.yml for this queue is what truly serialises execution.
-  sidekiq_options queue: :osrm, retry: 3
-
-  # Redis key that stores the Unix timestamp (float) of the last OSRM call.
-  LAST_REQUEST_KEY    = "osrm:last_request_at"
+  # Cache key that stores the Unix timestamp (float) of the last OSRM call.
+  LAST_REQUEST_KEY   = "osrm:last_request_at"
 
   # Desired minimum gap between consecutive outbound requests (seconds).
-  RATE_LIMIT_SECONDS  = 10
+  RATE_LIMIT_SECONDS = 10
 
   # @param origin        [String]   e.g. "Girona"
   # @param destination   [String]   e.g. "Barcelona"
@@ -74,24 +71,13 @@ class OsrmRoutingWorker
   # Rate limiting
   # -----------------------------------------------------------------------
 
-  # Reads the last-request timestamp from Redis and sleeps if the required
-  # gap has not yet elapsed, then atomically updates the timestamp.
   def enforce_rate_limit!
-    redis do |conn|
-      last_request_at = conn.get(LAST_REQUEST_KEY).to_f   # 0.0 when key absent
-      elapsed         = Time.now.to_f - last_request_at
-      sleep_for       = RATE_LIMIT_SECONDS - elapsed
+    last_request_at = Rails.cache.read(LAST_REQUEST_KEY).to_f
+    elapsed         = Time.now.to_f - last_request_at
+    sleep_for       = RATE_LIMIT_SECONDS - elapsed
 
-      sleep(sleep_for) if sleep_for > 0
+    sleep(sleep_for) if sleep_for > 0
 
-      # Record the moment we are about to fire the request.
-      conn.set(LAST_REQUEST_KEY, Time.now.to_f)
-    end
-  end
-
-  # Thin wrapper so callers get a plain Redis client without worrying about
-  # which adapter is configured (works with both redis-client and redis gems).
-  def redis(&block)
-    Sidekiq.redis(&block)
+    Rails.cache.write(LAST_REQUEST_KEY, Time.now.to_f, expires_in: 1.hour)
   end
 end

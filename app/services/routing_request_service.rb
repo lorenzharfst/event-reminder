@@ -41,7 +41,7 @@ class RoutingRequestService
   def call
     validate!
 
-    OsrmRoutingWorker.perform_async(
+    OsrmRoutingWorker.perform_later(
       @origin,
       @destination,
       @fan_distance,
