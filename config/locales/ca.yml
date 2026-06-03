@@ -15,7 +15,12 @@ ca:
     back: "Tornar"
     minutes_unit: "min"
     unsubscribed: "T'has donat de baixa d'aquesta notificació."
+    unsubscribed_all: "T'has donat de baixa de totes les notificacions."
     unsubscribe_invalid: "Aquest enllaç de cancel·lació no és vàlid o ha expirat."
+    unsubscribe_title: "Cancel·lar subscripció"
+    unsubscribe_choose: "Com vols cancel·lar la subscripció?"
+    unsubscribe_performer: "Cancel·lar subscripció només de %{performer}"
+    unsubscribe_all_button: "Cancel·lar totes les notificacions"
   home:
     tagline: "Mantén-te a prop de la música que estimes."
   events:

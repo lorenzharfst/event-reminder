@@ -15,7 +15,12 @@ es:
     back: "Volver"
     minutes_unit: "min"
     unsubscribed: "Has sido dado de baja de esta notificación."
+    unsubscribed_all: "Has sido dado de baja de todas las notificaciones."
     unsubscribe_invalid: "Este enlace de cancelación no es válido o ha expirado."
+    unsubscribe_title: "Cancelar suscripción"
+    unsubscribe_choose: "¿Cómo quieres cancelar tu suscripción?"
+    unsubscribe_performer: "Cancelar suscripción solo de %{performer}"
+    unsubscribe_all_button: "Cancelar todas las notificaciones"
   home:
     tagline: "Mantente cerca de la música que amas."
   events:

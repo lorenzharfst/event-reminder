@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  before_action :authenticate_user!, except: [ :unsubscribe ]
+  before_action :authenticate_user!, except: [ :unsubscribe, :confirm_unsubscribe ]
   before_action :set_notification, only: [ :edit, :update, :destroy ]
 
   def index
@@ -23,12 +23,24 @@ class NotificationsController < ApplicationController
   end
 
   def unsubscribe
+    @notification = Notification.find_signed(params[:token], purpose: :unsubscribe)
+    unless @notification
+      redirect_to root_path, alert: t("notifications.unsubscribe_invalid")
+    end
+  end
+
+  def confirm_unsubscribe
     notification = Notification.find_signed(params[:token], purpose: :unsubscribe)
-    if notification
+    unless notification
+      redirect_to root_path, alert: t("notifications.unsubscribe_invalid") and return
+    end
+
+    if params[:scope] == "all"
+      notification.fan.notifications.destroy_all
+      redirect_to root_path, notice: t("notifications.unsubscribed_all")
+    else
       notification.destroy
       redirect_to root_path, notice: t("notifications.unsubscribed")
-    else
-      redirect_to root_path, alert: t("notifications.unsubscribe_invalid")
     end
   end
 

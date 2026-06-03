@@ -15,7 +15,12 @@ en:
     back: "Back"
     minutes_unit: "min"
     unsubscribed: "You have been unsubscribed from this notification."
+    unsubscribed_all: "You have been unsubscribed from all notifications."
     unsubscribe_invalid: "This unsubscribe link is invalid or has expired."
+    unsubscribe_title: "Unsubscribe"
+    unsubscribe_choose: "How would you like to unsubscribe?"
+    unsubscribe_performer: "Unsubscribe from %{performer} only"
+    unsubscribe_all_button: "Unsubscribe from all notifications"
   home:
     tagline: "Stay close to the music you love."
   events:
