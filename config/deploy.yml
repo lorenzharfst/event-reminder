@@ -7,7 +7,7 @@ image: event_reminder
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.1.46
+    - 162.19.137.142
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -93,7 +93,7 @@ builder:
 
 # Use a different ssh user than root
 ssh:
-  user: saba
+  user: derdiedas
   keys: [ "~/.ssh/id_ed25519" ]
 
 # Use accessory services (secrets come from .kamal/secrets).
