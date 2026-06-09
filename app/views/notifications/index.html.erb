@@ -6,6 +6,12 @@
 
 <div class="row justify-content-center">
   <div class="col-12 col-md-8 col-lg-6">
+    <% unless current_user.performer&.name.present? %>
+      <div class="alert alert-info d-flex align-items-center gap-2 mb-4" role="alert">
+        <%= t("notifications.performer_cta_prefix") %>
+        <%= link_to t("notifications.performer_cta_link"), performer_events_path(current_user.performer), class: "alert-link" %>
+      </div>
+    <% end %>
     <h1 class="fw-bold mb-4"><%= t("notifications.title") %></h1>
 
     <% if @notifications.any? %>

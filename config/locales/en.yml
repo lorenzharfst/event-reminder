@@ -18,6 +18,8 @@ en:
     unsubscribed_all: "You have been unsubscribed from all notifications."
     unsubscribe_invalid: "This unsubscribe link is invalid or has expired."
     unsubscribe_title: "Unsubscribe"
+    performer_cta_prefix: "You're a performer and want to set up a shareable link?"
+    performer_cta_link: "Click here!"
     unsubscribe_choose: "How would you like to unsubscribe?"
     unsubscribe_performer: "Unsubscribe from %{performer} only"
     unsubscribe_all_button: "Unsubscribe from all notifications"

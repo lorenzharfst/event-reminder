@@ -18,6 +18,8 @@ es:
     unsubscribed_all: "Has sido dado de baja de todas las notificaciones."
     unsubscribe_invalid: "Este enlace de cancelación no es válido o ha expirado."
     unsubscribe_title: "Cancelar suscripción"
+    performer_cta_prefix: "¿Eres artista y quieres crear un enlace compartible?"
+    performer_cta_link: "¡Haz clic aquí!"
     unsubscribe_choose: "¿Cómo quieres cancelar tu suscripción?"
     unsubscribe_performer: "Cancelar suscripción solo de %{performer}"
     unsubscribe_all_button: "Cancelar todas las notificaciones"

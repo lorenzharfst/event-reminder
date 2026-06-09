@@ -18,6 +18,8 @@ ca:
     unsubscribed_all: "T'has donat de baixa de totes les notificacions."
     unsubscribe_invalid: "Aquest enllaç de cancel·lació no és vàlid o ha expirat."
     unsubscribe_title: "Cancel·lar subscripció"
+    performer_cta_prefix: "Ets artista i vols crear un enllaç compartible?"
+    performer_cta_link: "Fes clic aquí!"
     unsubscribe_choose: "Com vols cancel·lar la subscripció?"
     unsubscribe_performer: "Cancel·lar subscripció només de %{performer}"
     unsubscribe_all_button: "Cancel·lar totes les notificacions"
