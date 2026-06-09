@@ -3,19 +3,22 @@
 PG_VERSION=$(ls /etc/postgresql/ | head -1)
 PG_DATA="/var/lib/postgresql/${PG_VERSION}/main"
 
-# Initialize the PostgreSQL cluster if not already done
-if [ ! -f "${PG_DATA}/postgresql.conf" ]; then
+# Initialize the PostgreSQL cluster if the volume is empty
+if [ ! -f "${PG_DATA}/PG_VERSION" ]; then
   rm -rf "${PG_DATA}"
   mkdir -p "${PG_DATA}"
   chown -R postgres:postgres /var/lib/postgresql
   su - postgres -c "/usr/lib/postgresql/${PG_VERSION}/bin/initdb -D ${PG_DATA}"
 fi
 
+# Remove stale pid left by an unclean shutdown
+rm -f "${PG_DATA}/postmaster.pid"
+
 # Start the embedded PostgreSQL server
 su - postgres -c "/usr/lib/postgresql/${PG_VERSION}/bin/pg_ctl -D ${PG_DATA} -w start"
 
-# Set the postgres user password from the injected secret
-su - postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD '${DB_PASSWORD}';\""
+# Connect via TCP to bypass Debian's pg_wrapper picking the wrong socket port
+su - postgres -c "psql -h 127.0.0.1 -p 5432 -c \"ALTER USER postgres WITH PASSWORD '${DB_PASSWORD}';\""
 
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
