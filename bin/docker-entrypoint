@@ -3,8 +3,9 @@
 PG_VERSION=$(ls /etc/postgresql/ | head -1)
 PG_DATA="/var/lib/postgresql/${PG_VERSION}/main"
 
-# Initialize the PostgreSQL cluster if the volume is empty (e.g. first boot)
+# Initialize the PostgreSQL cluster if not already done
 if [ ! -f "${PG_DATA}/postgresql.conf" ]; then
+  rm -rf "${PG_DATA}"
   mkdir -p "${PG_DATA}"
   chown -R postgres:postgres /var/lib/postgresql
   su - postgres -c "/usr/lib/postgresql/${PG_VERSION}/bin/initdb -D ${PG_DATA}"
