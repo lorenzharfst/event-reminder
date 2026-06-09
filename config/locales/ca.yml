@@ -1,5 +1,5 @@
 ca:
-  app_name: "Event Reminder"
+  app_name: "Event Notifier"
   nav:
     log_out: "Tancar sessió"
     manage_events: "Gestionar els meus esdeveniments"

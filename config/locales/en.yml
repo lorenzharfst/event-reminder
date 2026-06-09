@@ -1,5 +1,5 @@
 en:
-  app_name: "Event Reminder"
+  app_name: "Event Notifier"
   nav:
     log_out: "Log out"
     manage_events: "Manage my events"

@@ -1,5 +1,5 @@
 es:
-  app_name: "Event Reminder"
+  app_name: "Event Notifier"
   nav:
     log_out: "Cerrar sesión"
     manage_events: "Gestionar mis eventos"
