@@ -5,6 +5,22 @@
 
 <% if current_user.performer.id == @performer.id %>
   <div class="row g-4">
+    <div class="col-12">
+      <div class="card shadow-sm"
+           data-controller="clipboard"
+           data-clipboard-success-label-value="<%= t('events.copied') %>">
+        <div class="card-header bg-white fw-semibold border-bottom"><%= t("events.shareable_link") %></div>
+        <div class="card-body d-flex align-items-center gap-2">
+          <input data-clipboard-target="source" type="text" class="form-control font-monospace"
+                 value="<%= performer_url(@performer) %>" readonly>
+          <button data-clipboard-target="button"
+                  data-action="clipboard#copy"
+                  class="btn btn-outline-secondary flex-shrink-0"
+                  type="button"><%= t("events.copy") %></button>
+        </div>
+      </div>
+    </div>
+
     <div class="col-12 col-lg-6">
       <div class="card shadow-sm h-100">
         <div class="card-header bg-white fw-semibold border-bottom"><%= t("events.update_stage_name") %></div>

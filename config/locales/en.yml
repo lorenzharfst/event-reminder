@@ -37,6 +37,9 @@ en:
     no_events: "No events yet."
     delete: "Delete"
     delete_confirm: "Delete this event?"
+    shareable_link: "Shareable link"
+    copy: "Copy"
+    copied: "Copied!"
   performers:
     sign_in_to_subscribe: "Sign in to subscribe"
     sign_in_description: "Log in to get notified when this performer has an event near you."

@@ -37,6 +37,9 @@ es:
     no_events: "Sin eventos todavía."
     delete: "Eliminar"
     delete_confirm: "¿Eliminar este evento?"
+    shareable_link: "Enlace compartible"
+    copy: "Copiar"
+    copied: "¡Copiado!"
   performers:
     sign_in_to_subscribe: "Inicia sesión para suscribirte"
     sign_in_description: "Inicia sesión para recibir notificaciones cuando este artista tenga un evento cerca de ti."

@@ -37,6 +37,9 @@ ca:
     no_events: "Encara no hi ha esdeveniments."
     delete: "Eliminar"
     delete_confirm: "Eliminar aquest esdeveniment?"
+    shareable_link: "Enllaç compartible"
+    copy: "Copiar"
+    copied: "Copiat!"
   performers:
     sign_in_to_subscribe: "Inicia sessió per subscriure't"
     sign_in_description: "Inicia sessió per rebre notificacions quan aquest artista tingui un esdeveniment a prop teu."
