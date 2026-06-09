@@ -10,7 +10,7 @@ if [ ! -f "${PG_DATA}/postgresql.conf" ]; then
   rm -rf "${PG_DATA}"
   mkdir -p "${PG_DATA}"
   chown -R postgres:postgres /var/lib/postgresql
-  su - postgres -c "/usr/lib/postgresql/${PG_VERSION}/bin/initdb -D ${PG_DATA}"
+  su - postgres -c "/usr/lib/postgresql/${PG_VERSION}/bin/initdb -D ${PG_DATA} --locale=C.UTF-8 --encoding=UTF8"
 fi
 
 # Remove stale pid left by an unclean shutdown
