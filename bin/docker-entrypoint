@@ -3,8 +3,10 @@
 PG_VERSION=$(ls /etc/postgresql/ | head -1)
 PG_DATA="/var/lib/postgresql/${PG_VERSION}/main"
 
-# Initialize the PostgreSQL cluster if the volume is empty
-if [ ! -f "${PG_DATA}/PG_VERSION" ]; then
+# Initialize the PostgreSQL cluster if not already done by us.
+# Debian's layout puts postgresql.conf in /etc/postgresql, not the data dir,
+# so its absence means initdb hasn't run yet and we need a self-contained cluster.
+if [ ! -f "${PG_DATA}/postgresql.conf" ]; then
   rm -rf "${PG_DATA}"
   mkdir -p "${PG_DATA}"
   chown -R postgres:postgres /var/lib/postgresql
