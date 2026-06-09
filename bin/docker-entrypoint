@@ -1,8 +1,17 @@
 #!/bin/bash -e
 
-# Start the embedded PostgreSQL server
 PG_VERSION=$(ls /etc/postgresql/ | head -1)
-su - postgres -c "/usr/lib/postgresql/${PG_VERSION}/bin/pg_ctl -D /var/lib/postgresql/${PG_VERSION}/main -w start"
+PG_DATA="/var/lib/postgresql/${PG_VERSION}/main"
+
+# Initialize the PostgreSQL cluster if the volume is empty (e.g. first boot)
+if [ ! -f "${PG_DATA}/postgresql.conf" ]; then
+  mkdir -p "${PG_DATA}"
+  chown -R postgres:postgres /var/lib/postgresql
+  su - postgres -c "/usr/lib/postgresql/${PG_VERSION}/bin/initdb -D ${PG_DATA}"
+fi
+
+# Start the embedded PostgreSQL server
+su - postgres -c "/usr/lib/postgresql/${PG_VERSION}/bin/pg_ctl -D ${PG_DATA} -w start"
 
 # Set the postgres user password from the injected secret
 su - postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD '${DB_PASSWORD}';\""
