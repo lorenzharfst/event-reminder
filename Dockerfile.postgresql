@@ -1,0 +1,4 @@
+FROM postgres:17
+
+# Match the encoding and locale used when the original cluster was initialised
+ENV POSTGRES_INITDB_ARGS="--locale=C.UTF-8 --encoding=UTF8"
