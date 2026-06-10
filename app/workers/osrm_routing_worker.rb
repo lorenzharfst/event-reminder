@@ -61,10 +61,8 @@ class OsrmRoutingWorker < ApplicationJob
     return if event.event_date < Date.current
     return if EventNotification.already_sent?(fan.id, event.event_date, event.location, event.performer_id)
 
-    ActiveRecord::Base.transaction do
-      EventNotification.create!(event_id: event.id, fan_id: fan.id, sent_at: Time.current)
-      FanMailer.proximity_alert(fan, performer, event, distance_km).deliver_now
-    end
+    EventNotification.create!(event_id: event.id, fan_id: fan.id, sent_at: Time.current)
+    FanMailer.proximity_alert(fan, performer, event, distance_km).deliver_now
   end
 
   # -----------------------------------------------------------------------
